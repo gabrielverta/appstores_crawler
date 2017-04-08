@@ -11,6 +11,9 @@ def test_urldb():
     with loop_context() as loop:
         with TestClient(app, loop=loop) as client:
             async def empty_urls():
+                """
+                    Test GET api without results in database 
+                """
                 nonlocal client
                 await url_repository.remove_test_database()
                 response = await client.get('/api/urls')
@@ -21,6 +24,10 @@ def test_urldb():
                 assert 0 == len(data['urls'])
 
             async def add_urls():
+                """
+                    - Test POST to add new urls to database
+                    - Test GET api to retrieve results
+                """
                 nonlocal client
                 response = await client.post('/api/urls', data={
                     'urls': ['http://one.com', 'http://two.com', 'http://three.com'],
