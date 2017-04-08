@@ -24,13 +24,19 @@ def test_urldb():
                 nonlocal client
                 response = await client.post('/api/urls', data={
                     'urls': ['http://one.com', 'http://two.com', 'http://three.com'],
-                    'order': [1, 2, -1]
+                    'order': [1, 2, -1],
+                    'categories': ['books', 'games', 'puzzles']
                 })
                 assert 204 == response.status
                 response = await client.get('/api/urls')
                 assert 200 == response.status
                 data = await response.json()
                 assert 3 == len(data['urls'])
+                first = data['urls'][0]
+
+                assert 'http://one.com' == first['url']
+                assert isinstance(first['categories'], list)
+                assert 'books' == first['categories'][0]['name']
 
             loop.run_until_complete(empty_urls())
             loop.run_until_complete(add_urls())

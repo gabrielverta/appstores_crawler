@@ -27,8 +27,9 @@ async def add_urls(request):
     try:
         urls = data.getall('urls')
         order = data.getall('order')
+        categories = data.getall('categories')
 
-        urls_to_add = [(urls[i], order[i]) for i in range(len(urls))]
+        urls_to_add = [(urls[i], {'name': categories[i], 'order': order[i]}) for i in range(len(urls))]
         await url_repository.add_urls(urls_to_add)
     except KeyError:
         raise web.HTTPBadRequest
