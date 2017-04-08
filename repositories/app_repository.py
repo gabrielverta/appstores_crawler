@@ -33,13 +33,23 @@ async def add_app(app):
         :param urls_to_add: [(url, {'name': 'game', 'order': 1}), (url, {'name': 'books', 'order': -1}), ...]  
     """
     if not 'apple' in app and not 'google' in app:
-        raise Exception("Invalid app")
+        raise KeyError("Invalid app")
 
-    if 'apple' in app and not 'url' in app['apple']:
-        raise Exception("Invalid app")
+    if 'apple' in app and (
+            not 'url' in app['apple']
+                    or not 'name' in app['apple']
+                or not app['apple']['name']
+            or not app['apple']['url']
+    ):
+        raise KeyError("Invalid app")
 
-    if 'google' in app and not 'url' in app['google']:
-        raise Exception("Invalid app")
+    if 'google' in app and (
+                        not 'url' in app['google']
+                    or not 'name' in app['google']
+                or not app['google']['name']
+            or not app['google']['url']
+    ):
+        raise KeyError("Invalid app")
 
     client = motor.motor_asyncio.AsyncIOMotorClient(settings.APPDB_MONGO['CONNECTION'])
     db = client[settings.APPDB_MONGO['DATABASE']]
@@ -50,9 +60,6 @@ async def add_app(app):
 
     if 'google' in app:
         await collection.replace_one({'google.url': app['google']['url']}, app, upsert=True)
-
-    # for url, order in urls_to_add:
-    #     await collection.update_one({'url': url}, {'$addToSet': {'categories': order}}, upsert=True)
 
 
 async def remove_test_database():

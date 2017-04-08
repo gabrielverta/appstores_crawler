@@ -118,30 +118,41 @@ def test_appdb():
                 assert 1 == len(data['apps'])
                 assert "Kindle – Read eBooks, Magazines & Textbooks" == data['apps'][0]['apple']['name']
 
-            # async def add_urls():
-            #     """
-            #         - Test POST to add new urls to database
-            #         - Test GET api to retrieve results
-            #     """
-            #     nonlocal client
-            #     response = await client.post('/api/urls', data={
-            #         'urls': ['http://one.com', 'http://two.com', 'http://three.com'],
-            #         'order': [1, 2, -1],
-            #         'categories': ['books', 'games', 'puzzles']
-            #     })
-            #     assert 204 == response.status
-            #     response = await client.get('/api/urls')
-            #     assert 200 == response.status
-            #     data = await response.json()
-            #     assert 3 == len(data['urls'])
-            #     first = data['urls'][0]
-            #
-            #     assert 'http://one.com' == first['url']
-            #     assert isinstance(first['categories'], list)
-            #     assert 'books' == first['categories'][0]['name']
+            async def add_app():
+                """
+                    - Test POST to add new app to database
+                    - Test GET api to retrieve result
+                """
+                nonlocal client
+                testing = 'testing'
+                app_to_add = app_for_testing()
+                del app_to_add['apple']
+                app_to_add['google']['name'] = testing
+                response = await client.post('/api/apps', json=app_to_add)
+                assert 204 == response.status
+                response = await client.get('/api/apps?q=testing')
+                assert 200 == response.status
+                data = await response.json()
+                assert 1 == len(data['apps'])
+                first = data['apps'][0]
+
+                assert testing == first['google']['name']
+
+            async def add_app_without_name():
+                """
+                    - Test POST to add new app without name
+                """
+                nonlocal client
+                testing = 'testing'
+                app_to_add = app_for_testing()
+                del app_to_add['apple']
+                app_to_add['google']['name'] = ''
+                response = await client.post('/api/apps', json=app_to_add)
+                assert 400 == response.status
 
             loop.run_until_complete(without_query())
             loop.run_until_complete(empty_apps())
             loop.run_until_complete(query_by_url())
             loop.run_until_complete(query_by_name())
-            # loop.run_until_complete(add_urls())
+            loop.run_until_complete(add_app())
+            loop.run_until_complete(add_app_without_name())
