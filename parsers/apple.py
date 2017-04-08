@@ -21,6 +21,7 @@ def categories(content):
         link = item.find('a')
         category = {'name': str(link.string), 'url': link['href'], 'children': []}
 
+        # does it have sub categories?
         if item.find('ul'):
             sub_categories = item.select('> .list > li > a')
             category['children'] = [{'name': str(c.string), 'url': c['href']} for c in sub_categories]
