@@ -77,7 +77,7 @@ def app(content):
     return dict(
         name=str(html.select_one('[itemprop=name]').string),
         icon=html.select_one('[itemprop=image]')['content'],
-        price=float(html.select_one('[itemprop=price]')['content']),
+        price=float(html.select_one('[itemprop=price]')['content'].replace("$", "")),
         description=html.select_one('[itemprop=description]').text,
         developer=str(html.select_one('[itemprop=author]').string),
         screenshots=dict(

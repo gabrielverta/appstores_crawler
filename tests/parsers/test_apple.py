@@ -1,6 +1,8 @@
 import os
+import re
 from parsers import apple
 
+SPACELESS = re.compile(r'\s', re.MULTILINE)
 TEMPLATES_PATH = os.path.join(os.path.dirname(os.path.realpath(os.path.dirname(__file__))), "templates", "apple")
 
 
@@ -104,4 +106,70 @@ def test_parse_app_detail():
     template = open(os.path.join(TEMPLATES_PATH, "free-app.html")).read()
     kindle = apple.app(template)
     for key in expected:
+        assert expected[key] == kindle[key]
+
+
+def test_parse_paid_app_detail():
+    """
+        Test paid app details 
+    """
+    expected = dict(
+        name='Facetune',
+        icon='http://is5.mzstatic.com/image/thumb/Purple122/v4/80/e1/a1/80e1a19a-cbe2-91e8-2c63-428bbd296d60/source'
+             '/175x175bb.jpg',
+        price=3.99,
+        description="""Facetune 2 is now available on the App Store!\n\n• "Facetune helps you look your Hollywood 
+        best, even in photos taken on mobile phones." - Roy Furchgott, The NY Times\n• Facetune is a fun and powerful 
+        portrait & selfie photo editor!\n• #1 Photo and Video App in 127 
+        countries!\n\n---------------------------------------------------------\n\nProfessional photographers and 
+        graphic designers constantly photoshop models to perfection, and now so can you! Without the expensive price 
+        tag or complicated tools, Facetune gives you the ability to retouch and add artistic flair to selfies and 
+        portraits with ease, from the convenience of your iPhone.\n\nPraises about Facetune:\n• "Facetune helps you 
+        look your Hollywood best, even in photos taken on mobile phones." - Roy Furchgott, The NY Times\n• "One of 
+        the Most Powerful Mobile Apps I have Ever Encountered... Facetune Can Truly Be Called Magical." - Hillel 
+        Fuld, Huffington Post\n• “I have been seriously impressed with the patch quality FaceTune does. You get 
+        pretty much a Photoshop editing job in the palm of your hand.” - Allyson Kazmucha, 
+        iMore\n\n---------------------------------------------------------\n\nEvery photo could use a touch up. 
+        That's why magazines use expensive and complicated tools like Photoshop to make people look their best. But 
+        now, there’s Facetune! Facetune provides easy-to-use, powerful tools (previously reserved only for the pros) 
+        to perfect every photo or selfie, making each one look like it came straight out of a high-fashion magazine. 
+        Now you can be sure that all your portraits show only the best version of you - whether you’ll be using them 
+        for your professional profile or simply sharing online with 
+        friends.\n\n---------------------------------------------------------\n\nWhat can Facetune do for 
+        you?\n\nPERFECT SMILES\n• Widen or refine your smile\n• Whiten and brighten your teeth\n\nBEAUTIFUL SKIN\n• 
+        Smooth and rejuvenate your skin\n• Remove temporary imperfections like pimples and blemishes\n• Brighten dark 
+        circles under your eyes\n\nPENETRATING EYES\n• Emphasize your eyes for a penetrating gaze\n• Change your eye 
+        color\n• Remove red and white-eye effects\n\nHAIR SALON\n• Color over grey hair\n• Fill bald patches\n• 
+        Remove stray hairs\n\nRESHAPE FACIAL STRUCTURE\n• Refine jaw lines\n• Heighten cheek bones and brows\n• 
+        Reshape your nose\n• Enlarge or shrink a specific area of the image\n• Totally transform your face into alien 
+        or other fun shapes\n\nVIVID MAKEUP\n• Apply any shade of blush and eye shadow\n• Add volume to your lashes 
+        and shape your brows\n• Add color to your lips\n• Add intensity to your natural lip color\n\nPHOTO 
+        ENHANCEMENTS\n• Focus the photo on you, by defocusing or blurring the background\n• Improve lighting or add 
+        special effects\n• Create customized filters\n• Add unique textures and customizable frames\n• Rotate the 
+        photo or flip to its mirror image\n\nMAKE ART\n• Add artistic touches to make your photo your own\n• 
+        Customizable filters can be applied to the entire photo or to specific areas\n\nSHOW OFF\n• Instantly share 
+        your edited photos with your friends & family through social media or e-mail\n\nEASY AND FUN\n• Compare your 
+        work with the original photo at every step of the way, with only one tap\n• Having trouble? Facetune offers 
+        informative graphic and video help screens for each feature\n\nRESOLUTIONS\n• iPhone 6S, 6S Plus: 12.6 MP\n• 
+        iPhone 6, 6 Plus 16.8 MP\n• iPhone 5, 5C, 5S: 12.6 MP\n• iPhone 4S: 8 MP\n• iPhone 4: 4.1 MP""",
+        developer='Lightricks Ltd.',
+        screenshots=dict(phone=[
+            'http://a5.mzstatic.com/us/r30/Purple4/v4/ac/29/9e/ac299e60-01eb-dcbc-575b-c5a8c2070a72/screen696x696.jpeg',
+            'http://a3.mzstatic.com/us/r30/Purple4/v4/87/0d/e1/870de137-3646-b0b6-7af4-3fa4c7999f39/screen696x696.jpeg',
+            'http://a2.mzstatic.com/us/r30/Purple4/v4/4b/77/79/4b77799b-d298-807d-a02f-cfa962f18350/screen696x696.jpeg',
+            'http://a3.mzstatic.com/us/r30/Purple4/v4/bb/eb/a9/bbeba9b5-b42e-f5a2-8b77-afcef7bbb7c7/screen696x696.jpeg',
+            'http://a4.mzstatic.com/us/r30/Purple3/v4/0d/ef/8d/0def8d61-eddf-8a7b-0ea9-caa3af46f1b6/screen696x696.jpeg'
+        ], tablet=[]),
+        review=dict(
+            count=33,
+            value=3.84848
+        )
+    )
+
+    template = open(os.path.join(TEMPLATES_PATH, "paid-app.html")).read()
+    kindle = apple.app(template)
+    for key in expected:
+        if key == 'description': # no way to make this string comparison using spaces
+            assert SPACELESS.sub('', expected[key]) == SPACELESS.sub('', kindle[key])
+            continue
         assert expected[key] == kindle[key]
