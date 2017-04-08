@@ -1,3 +1,4 @@
+import itertools
 from bs4 import BeautifulSoup
 
 
@@ -44,15 +45,22 @@ def top_apps_from_category(content):
         :param content: HTML of the page 
         :return: list
     """
-    response = []
-
     html = BeautifulSoup(content, 'html.parser')
-    items = html.select('#selectedgenre #selectedcontent ul li a')
+    lists = html.select('#selectedgenre #selectedcontent ul')
 
-    for item in items:
-        response.append({
-            'name': str(item.string),
-            'url': item['href']
-        })
+    response = [[], [], []]
+    counter = 0
+    for l in lists:
+        items = l.select('li a')
 
-    return response
+        for item in items:
+            response[counter].append({
+                'name': str(item.string),
+                'url': item['href']
+            })
+
+        counter += 1
+
+    return list(itertools.chain.from_iterable([
+        (response[0][i], response[1][i], response[2][i]) for i in range(len(response[0]))
+    ]))

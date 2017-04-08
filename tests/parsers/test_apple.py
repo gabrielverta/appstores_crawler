@@ -43,11 +43,11 @@ def test_parse_top_by_category():
         'name': 'Kindle – Read eBooks, Magazines & Textbooks',
         'url': 'https://itunes.apple.com/us/app/kindle-read-ebooks-magazines-textbooks/id302584613?mt=8'
     }, {
-        'name': 'Audible – audio books, original series & podcasts',
-        'url': 'https://itunes.apple.com/us/app/audible-audio-books-original-series-podcasts/id379693831?mt=8',
+        'name': 'Advanced Photoshop Magazine: Professional guides',
+        'url': 'https://itunes.apple.com/us/app/advanced-photoshop-magazine-professional-guides/id470900017?mt=8',
     }, {
-        'name': 'Wattpad - Read unlimited books and eBooks',
-        'url': 'https://itunes.apple.com/us/app/wattpad-read-unlimited-books-and-ebooks/id306310789?mt=8'
+        'name': 'T.D. Jakes Ministries',
+        'url': 'https://itunes.apple.com/us/app/t-d-jakes-ministries/id979567335?mt=8'
     }]
     top_count = 240
 
