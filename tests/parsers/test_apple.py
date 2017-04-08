@@ -99,7 +99,8 @@ def test_parse_app_detail():
         ]),
         review=dict(
             count=167,
-            value=3.96407
+            value=3.96407,
+            version='5.9.1'
         )
     )
 
@@ -162,7 +163,8 @@ def test_parse_paid_app_detail():
         ], tablet=[]),
         review=dict(
             count=33,
-            value=3.84848
+            value=3.84848,
+            version='2.6.3'
         )
     )
 

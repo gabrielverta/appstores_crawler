@@ -86,6 +86,7 @@ def app(content):
         ),
         review=dict(
             count=int(html.select_one('[itemprop=reviewCount]').text.replace(" Ratings", "")),
-            value=float(html.select_one('[itemprop=ratingValue]').text)
+            value=float(html.select_one('[itemprop=ratingValue]').text),
+            version=html.select_one('[itemprop=softwareVersion]').text
         )
     )
