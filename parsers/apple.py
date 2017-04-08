@@ -64,3 +64,28 @@ def top_apps_from_category(content):
     return list(itertools.chain.from_iterable([
         (response[0][i], response[1][i], response[2][i]) for i in range(len(response[0]))
     ]))
+
+
+def app(content):
+    """
+    
+        :param content: 
+        :return: 
+    """
+    html = BeautifulSoup(content, 'html.parser')
+
+    return dict(
+        name=str(html.select_one('[itemprop=name]').string),
+        icon=html.select_one('[itemprop=image]')['content'],
+        price=float(html.select_one('[itemprop=price]')['content']),
+        description=html.select_one('[itemprop=description]').text,
+        developer=str(html.select_one('[itemprop=author]').string),
+        screenshots=dict(
+            phone=[img['src'] for img in html.select('.iphone-screen-shots [itemprop=screenshot]')],
+            tablet=[img['src'] for img in html.select('.ipad-screen-shots [itemprop=screenshot]')]
+        ),
+        review=dict(
+            count=int(html.select_one('[itemprop=reviewCount]').text.replace(" Ratings", "")),
+            value=float(html.select_one('[itemprop=ratingValue]').text)
+        )
+    )
