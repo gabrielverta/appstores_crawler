@@ -67,41 +67,38 @@ def test_parse_app_detail():
         Test app details 
     """
     expected = dict(
-      name='Kindle – Read eBooks, Magazines & Textbooks',
-      icon='http://is2.mzstatic.com/image/thumb/Purple122/v4/b6/82/d1/b682d1b6-914d-da22-0b60-c48d7addf5cd/source'
-           '/175x175bb.jpg',
-      price=0.0,
-      description='Turn your iPhone or iPad into a Kindle with the free Kindle app, and carry all your eBooks with '
-                  'you, wherever you go. eBooks (including those with narration) that you have purchased on Amazon '
-                  'will automatically appear in your app.  Kindle Unlimited and Amazon Prime members can select and '
-                  'download eBooks directly in the app. What you’ll get:• Sample any eBook for free• Magazines, '
-                  'newspapers, graphic novels and textbooks with high-res color images• A customizable reading '
-                  'experience with your choice of font style, size and more• Comfortable reading day and night with '
-                  'adjustable screen brightness and page color• Discover and download Kindle Unlimited eBooks and '
-                  'magazines• Unique features like X-Ray, Whispersync, Page Flip, Print Replica, flashcards and more• '
-                  'Instant translations and definitions, without leaving the page• Ability to make and share in-page '
-                  'highlights• Bold font and text size options• Access to local library eBooks',
-      developer='AMZN Mobile LLC',
-      screenshots=dict(
-          phone=[
-        'http://a1.mzstatic.com/us/r30/Purple42/v4/8a/9c/6b/8a9c6b74-4780-8a32-f34f-f884096693f3/screen696x696.jpeg',
-        'http://a2.mzstatic.com/us/r30/Purple71/v4/48/51/45/48514519-f897-d5fb-a23c-76d5c44ef9c8/screen696x696.jpeg',
-        'http://a1.mzstatic.com/us/r30/Purple62/v4/00/02/6e/00026e18-b0ed-8a22-7ae4-e31aa341182d/screen696x696.jpeg',
-        'http://a3.mzstatic.com/us/r30/Purple41/v4/21/bf/f8/21bff85d-b3cb-469b-9bbd-49c7f18aa629/screen696x696.jpeg',
-        'http://a2.mzstatic.com/us/r30/Purple42/v4/27/d0/65/27d06586-edbd-af71-a0bb-cf365e73bda0/screen696x696.jpeg'
-          ],
-          tablet=[
-              'http://a2.mzstatic.com/us/r30/Purple71/v4/2a/98/d7/2a98d765-0fac-ddd8-875f-53ae25fd88fe/sc1024x768.jpeg',
-              'http://a1.mzstatic.com/us/r30/Purple62/v4/1b/8e/c5/1b8ec5e7-e855-c94a-7d94-128735ce80e5/sc1024x768.jpeg',
-              'http://a5.mzstatic.com/us/r30/Purple62/v4/b5/e6/88/b5e688bb-abb7-9e24-cd79-5102ddee86fc/sc1024x768.jpeg',
-              'http://a3.mzstatic.com/us/r30/Purple22/v4/bc/f2/22/bcf222e5-9157-0ff5-812c-d558162680f1/sc1024x768.jpeg',
-              'http://a3.mzstatic.com/us/r30/Purple62/v4/0f/c6/f1/0fc6f13e-38c3-194b-ff63-ec6c736d068c/sc1024x768.jpeg'
-          ]
-      ),
-      review=dict(
-          count=167,
-          value=3.96407
-      )
+        name='Kindle – Read eBooks, Magazines & Textbooks',
+        icon='http://is2.mzstatic.com/image/thumb/Purple122/v4/b6/82/d1/b682d1b6-914d-da22-0b60-c48d7addf5cd/source'
+             '/175x175bb.jpg',
+        price=0.0,
+        description='Turn your iPhone or iPad into a Kindle with the free Kindle app, and carry all your eBooks with '
+                'you, wherever you go. eBooks (including those with narration) that you have purchased on Amazon '
+                'will automatically appear in your app.  Kindle Unlimited and Amazon Prime members can select and '
+                'download eBooks directly in the app. What you’ll get:• Sample any eBook for free• Magazines, '
+                'newspapers, graphic novels and textbooks with high-res color images• A customizable reading '
+                'experience with your choice of font style, size and more• Comfortable reading day and night with '
+                'adjustable screen brightness and page color• Discover and download Kindle Unlimited eBooks and '
+                'magazines• Unique features like X-Ray, Whispersync, Page Flip, Print Replica, flashcards and more• '
+                'Instant translations and definitions, without leaving the page• Ability to make and share in-page '
+                'highlights• Bold font and text size options• Access to local library eBooks',
+        developer='AMZN Mobile LLC',
+        screenshots=dict(phone=[
+           'http://a1.mzstatic.com/us/r30/Purple42/v4/8a/9c/6b/8a9c6b74-4780-8a32-f34f-f884096693f3/screen696x696.jpeg',
+           'http://a2.mzstatic.com/us/r30/Purple71/v4/48/51/45/48514519-f897-d5fb-a23c-76d5c44ef9c8/screen696x696.jpeg',
+           'http://a1.mzstatic.com/us/r30/Purple62/v4/00/02/6e/00026e18-b0ed-8a22-7ae4-e31aa341182d/screen696x696.jpeg',
+           'http://a3.mzstatic.com/us/r30/Purple41/v4/21/bf/f8/21bff85d-b3cb-469b-9bbd-49c7f18aa629/screen696x696.jpeg',
+           'http://a2.mzstatic.com/us/r30/Purple42/v4/27/d0/65/27d06586-edbd-af71-a0bb-cf365e73bda0/screen696x696.jpeg'
+        ], tablet=[
+           'http://a2.mzstatic.com/us/r30/Purple71/v4/2a/98/d7/2a98d765-0fac-ddd8-875f-53ae25fd88fe/sc1024x768.jpeg',
+           'http://a1.mzstatic.com/us/r30/Purple62/v4/1b/8e/c5/1b8ec5e7-e855-c94a-7d94-128735ce80e5/sc1024x768.jpeg',
+           'http://a5.mzstatic.com/us/r30/Purple62/v4/b5/e6/88/b5e688bb-abb7-9e24-cd79-5102ddee86fc/sc1024x768.jpeg',
+           'http://a3.mzstatic.com/us/r30/Purple22/v4/bc/f2/22/bcf222e5-9157-0ff5-812c-d558162680f1/sc1024x768.jpeg',
+           'http://a3.mzstatic.com/us/r30/Purple62/v4/0f/c6/f1/0fc6f13e-38c3-194b-ff63-ec6c736d068c/sc1024x768.jpeg'
+        ]),
+        review=dict(
+            count=167,
+            value=3.96407
+        )
     )
 
     template = open(os.path.join(TEMPLATES_PATH, "free-app.html")).read()
