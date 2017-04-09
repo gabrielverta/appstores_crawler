@@ -28,4 +28,51 @@ It also send new apps URLs to the *urldb* to be handled
 
 ## How to run it?
 
-...
+First of all, create a virtualenv for python 3.6
+
+```
+virtualenv --python=python3.6 env
+source env/bin/activate
+pip install -r requirements.txt
+```
+
+Run appdb.py
+
+```
+source env/bin/activate
+python appdb.py
+```
+
+Run urldb.py
+
+```
+source env/bin/activate
+python urldb.py
+```
+
+Run as many crawlers.py as you want, but be carefull to not flood app stores and be blocked.
+
+```
+source env/bin/activate
+python crawler.py
+```
+
+# The UI
+
+There is a simple UI using [material design](http://getmdl.io/) to query the results. Run a sample python server inside ui directory to make it run
+
+```
+python -m http.server
+```
+
+Open http://localhost:8000/ and there it is:
+
+
+
+## Tests
+
+To run the tests, project root directory must be in PYTHONPATH:
+
+```
+PYTHONPATH=$PWD py.test
+```
