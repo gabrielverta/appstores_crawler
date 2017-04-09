@@ -48,10 +48,10 @@
     <script src="appstore.js"></script>
     <script type="text/html" id="result-template">
         <div class="mdl-cell mdl-cell--3-col demo-card-square mdl-card mdl-shadow--2dp item">
-          <div class="mdl-card__title" style="background-image: url(<%= app.icon %>)">
+          <a href="<%= app.url %>" target="_blank" class="mdl-card__title" style="background-image: url(<%= app.icon %>)">
               <h2 class="mdl-card__title-text"><%= app.name %></h2>
               <small><span class="fa fa-<%= css %> fa-2x"></span> <%= app.developer %></small>
-          </div>
+          </a>
           <div class="mdl-card__actions mdl-card--border">
             <div class="mdl-grid">
                 <div class="mdl-cell mdl-cell--8-col">

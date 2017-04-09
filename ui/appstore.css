@@ -1,7 +1,7 @@
 .mdl-textfield{line-height: 40px; padding:30px 0;}
 .mdl-textfield__label{font-size: 24px;}
 .mdl-textfield__label::after {bottom: 30px;}
-.mdl-card__title{background-repeat: no-repeat; background-size: 175px 175px; background-color:rgb(255,82,82); height: 175px; background-position: top right;}
+.mdl-card__title{background-repeat: no-repeat; background-size: 175px 175px; background-color:rgb(255,82,82); height: 175px; background-position: top right; text-decoration: none;}
 .mdl-card__title-text{color: #fff; width: 255px;}
 .star{float:right; width: 25px;}
 .score{margin: 0 !important; text-align:right;}
@@ -13,3 +13,4 @@
 .mdl-cell p{display: block; clear: both; text-align: right; margin: 0; padding: 10px 0; color: #666;}
 #loader{margin: 100px auto;}
 .highlight{width:100%; text-align:center; padding: 100px 0 0px;}
+.md-cell a{text-decoration: none !important;}
