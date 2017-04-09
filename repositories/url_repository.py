@@ -20,7 +20,7 @@ async def next_urls(size=10):
     collection = db[settings.URLDB_MONGO['COLLECTION']]
     yesterday = datetime.now() - timedelta(days=1)
     results = await collection.find({'$or': [
-        {'updated_at': None}, {'updated_at': {'$gt': yesterday}}
+        {'updated_at': None}, {'updated_at': {'$lt': yesterday}}
     ]}).sort([('categories.order', 1), ('updated_at', 1)]).to_list(length=size)
 
     await collection.update_many({'_id': {'$in': [r['_id'] for r in results]}}, {
