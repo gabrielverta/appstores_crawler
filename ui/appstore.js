@@ -1,6 +1,7 @@
 (function(){
     $(function(){
         var timer = null;
+        var last = null;
         var showLoading = function(){
             $('#results').html('<div id="loader" class="mdl-spinner mdl-js-spinner is-active"></div>');
         };
@@ -9,6 +10,13 @@
         };
         var doSearch = function(){
             var value = $('#q').val();
+
+            if(value == last){
+                return;
+            }
+
+            last = value;
+
 
             $('#results .item').remove();
             if(value == ""){
