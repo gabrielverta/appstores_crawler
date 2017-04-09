@@ -1,6 +1,4 @@
-from parsers import apple
-
-google = None
+from parsers import apple, google
 
 
 def get_backend(url):
