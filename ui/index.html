@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-red.min.css" />
     <link rel="stylesheet" href="appstore.css" />
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script>
+        var APP_API = "http://localhost:9000/api/apps";
+    </script>
 </head>
 <body>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -28,39 +31,44 @@
                     </div>
                     <div class="mdl-cell mdl-cell--4-col"></div>
                 </div>
-                <div class="mdl-grid">
-                    <div class="mdl-cell mdl-cell--3-col demo-card-square mdl-card mdl-shadow--2dp">
-                      <div class="mdl-card__title mdl-card--expand" style="background-image: url(http://is3.mzstatic.com/image/thumb/Purple122/v4/75/e3/4d/75e34d9b-cf58-8b27-b0dc-49116a0e7127/source/175x175bb.jpg)">
-                          <h2 class="mdl-card__title-text">Kindle - Read eBooks,<br/> Magazines & Textbooks</h2>
-                          <small>Amazon MDL</small>
-                      </div>
-                      <div class="mdl-card__supporting-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Aenan convallis.
-                      </div>
-                      <div class="mdl-card__actions mdl-card--border">
-                        <div class="mdl-grid">
-                            <div class="mdl-cell mdl-cell--8-col">
-                                <h4 class="price">Free</h4>
-                                <div>
-                                    <span class="mdl-badge" data-badge="4">Books</span>
-                                    <span class="mdl-badge" data-badge="18">Free</span>
-                                </div>
-                            </div>
-                            <div class="mdl-cell mdl-cell--4-col">
-                                <h3 class="score">4.1</h3>
-                                <i class="material-icons star">star_rate</i>
-                                <i class="material-icons star">star_rate</i>
-                                <i class="material-icons star">star_rate</i>
-                                <i class="material-icons star">star_rate</i>
-                            </div>
-                        </div>
-                      </div>
-                    </div>
+                <div id="results" class="mdl-grid">
+
                 </div>
             </form>
         </div>
       </main>
     </div>
+    <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+    <script src="http://underscorejs.org/underscore-min.js"></script>
+    <script src="appstore.js"></script>
+    <script type="text/html" id="result-template">
+        <div class="mdl-cell mdl-cell--3-col demo-card-square mdl-card mdl-shadow--2dp item">
+          <div class="mdl-card__title" style="background-image: url(http://is3.mzstatic.com/image/thumb/Purple122/v4/75/e3/4d/75e34d9b-cf58-8b27-b0dc-49116a0e7127/source/175x175bb.jpg)">
+              <h2 class="mdl-card__title-text"><%= app.name %></h2>
+              <small><%= app.developer %></small>
+          </div>
+          <div class="mdl-card__supporting-text mdl-card--expand"><%= parseText(app.description) %></div>
+          <div class="mdl-card__actions mdl-card--border">
+            <div class="mdl-grid">
+                <div class="mdl-cell mdl-cell--8-col">
+                    <h4 class="price"><%= app.price == 0 ? 'Free' : '$' + app.price %></h4>
+                    <div>
+                        <% for(var i = 0; i < app.ranking.length; i++){ %>
+                            <span class="mdl-badge mdl-badge--no-background" data-badge="<%= app.ranking[i].order %>"><%= app.ranking[i].name %></span>
+                        <% } %>
+                    </div>
+                </div>
+                <div class="mdl-cell mdl-cell--4-col">
+                    <h3 class="score"><%= formatScore(app.review.value) %></h3>
+                    <% for(var i = 0; i < parseInt(app.review.value); i++){ %>
+                        <i class="material-icons star">star_rate</i>
+                    <% } %>
+
+                    <p><%= app.review.count %> reviews<br/>version <%= app.review.version %></p>
+                </div>
+            </div>
+          </div>
+        </div>
+    </script>
 </body>
 </html>

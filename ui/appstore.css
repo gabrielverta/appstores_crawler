@@ -2,9 +2,12 @@
 .mdl-textfield__label{font-size: 24px;}
 .mdl-textfield__label::after {bottom: 30px;}
 .mdl-card__title{background-repeat: no-repeat; background-color:rgb(255,82,82); height: 175px; background-position: top right;}
-.mdl-card__title-text{color: #fff;}
+.mdl-card__title-text{color: #fff; width: 255px;}
 .star{float:right; width: 25px;}
 .score{margin: 0 !important; text-align:right;}
 .price{font-size: 20px; margin: 0 0 20px !important;}
-.mdl-badge{margin-right: 40px;}
+.mdl-badge{margin-right: 55px; line-height: 35px;}
+.mdl-badge[data-badge]::after {width: 30px; height: 30px; right: -40px;}
 .mdl-card__title small{position: absolute;left: 20px;color: #efefef;top: 20px;}
+.mdl-cell p{display: block; clear: both; text-align: right; margin: 0; padding: 10px 0; color: #666;}
+#loader{margin: 100px auto;}

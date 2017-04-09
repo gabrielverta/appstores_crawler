@@ -23,7 +23,12 @@ async def list_apps(request):
     except KeyError:
         raise web.HTTPBadRequest
 
-    return web.json_response({'apps': apps})
+    return web.json_response({'apps': apps}, headers={
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods:': '*',
+        'Access-Control-Allow-Headers': '*',
+        'Access-Control-Max-Age': '86400',
+    })
 
 
 async def add_app(request):
