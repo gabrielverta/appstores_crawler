@@ -13,6 +13,7 @@ Crawler for apple and google stores to get ranking of the best apps by category.
 
 ## How does it work?
 
+![initial screen](https://raw.githubusercontent.com/gabrielverta/appstores_crawler/master/ui/structure.png)
 
 ### Microservices
 
@@ -67,7 +68,9 @@ python -m http.server
 
 Open http://localhost:8000/ and there it is:
 
+![initial screen](https://raw.githubusercontent.com/gabrielverta/appstores_crawler/master/ui/ui.png)
 
+![results screen](https://raw.githubusercontent.com/gabrielverta/appstores_crawler/master/ui/ui-results.png)
 
 ## Tests
 
