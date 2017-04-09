@@ -50,7 +50,7 @@
         <div class="mdl-cell mdl-cell--3-col demo-card-square mdl-card mdl-shadow--2dp item">
           <div class="mdl-card__title" style="background-image: url(<%= app.icon %>)">
               <h2 class="mdl-card__title-text"><%= app.name %></h2>
-              <small><%= app.developer %></small>
+              <small><span class="fa fa-<%= css %> fa-2x"></span> <%= app.developer %></small>
           </div>
           <div class="mdl-card__actions mdl-card--border">
             <div class="mdl-grid">
@@ -74,5 +74,8 @@
           </div>
         </div>
     </script>
+
+    <script src="https://use.fontawesome.com/afd7c01604.js"></script>
+
 </body>
 </html>

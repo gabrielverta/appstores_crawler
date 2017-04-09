@@ -2,6 +2,9 @@ import asyncio
 import datetime
 import logging
 import os
+
+import aiohttp
+
 import settings
 import time
 from parsers import apple, google, utils
@@ -46,7 +49,16 @@ async def crawler():
     for url in urls['urls']:
         uri = url['url']
         logging.debug("fetching url {}".format(uri))
-        content = await repository.fetch(uri)
+        try:
+            content = await repository.fetch(uri)
+        except aiohttp.client_exceptions.ClientPayloadError:
+            logging.error("Could not download {}".format(uri))
+            timer = settings.TIME_BETWEEN_REQUESTS
+            wait = randint(timer[0], timer[1])
+            await repository.readd(url)
+            logging.info("Waiting {} seconds to try again".format(wait))
+            time.sleep(wait)
+
         backend = utils.get_backend(uri)
         logging.debug("{} backend: {}".format(backend.__name__, uri))
         if backend.is_url_directory(uri):

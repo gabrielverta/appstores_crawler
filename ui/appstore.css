@@ -8,7 +8,8 @@
 .price{font-size: 20px; margin: 0 0 20px !important;}
 .mdl-badge{margin-right: 55px; line-height: 35px;}
 .mdl-badge[data-badge]::after {width: 30px; height: 30px; right: -40px;}
-.mdl-card__title small{position: absolute;left: 20px;color: #efefef;top: 20px;}
+.mdl-card__title small{position: absolute;left: 0px; color: #efefef;top: 10px; width: 250px; text-indent: 10px; background:rgb(255,82,82);}
+.mdl-card__title small span{padding-right: 5px;}
 .mdl-cell p{display: block; clear: both; text-align: right; margin: 0; padding: 10px 0; color: #666;}
 #loader{margin: 100px auto;}
 .highlight{width:100%; text-align:center; padding: 100px 0 0px;}

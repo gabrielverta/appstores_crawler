@@ -139,3 +139,21 @@ async def save_directory_urls(urls, categories):
 
     urls_api = "http://{}:{}/api/urls".format(settings.URLDB_HOST, settings.URLDB_PORT)
     return await post(urls_api, data=params)
+
+
+async def readd(url):
+    order = -1
+    category = ''
+
+    if 'categories' in url and url['categories']:
+        order = url['categories'][0]['order']
+        category = url['categories'][0]['name']
+
+    params = {
+        'urls': [url['url']],
+        'order': [order],
+        'categories': [category]
+    }
+
+    urls_api = "http://{}:{}/api/urls".format(settings.URLDB_HOST, settings.URLDB_PORT)
+    return await post(urls_api, data=params)
