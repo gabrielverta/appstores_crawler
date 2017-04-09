@@ -21,7 +21,7 @@ async def next_urls(size=10):
     yesterday = datetime.now() - timedelta(days=1)
     results = await collection.find({'$or': [
         {'updated_at': None}, {'updated_at': {'$gt': yesterday}}
-    ]}).sort([('categories.order', 1), ('updated_at', -1)]).to_list(length=size)
+    ]}).sort([('categories.order', 1), ('updated_at', 1)]).to_list(length=size)
 
     await collection.update_many({'_id': {'$in': [r['_id'] for r in results]}}, {
         '$set': {'updated_at': datetime.now()}
