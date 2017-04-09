@@ -79,18 +79,23 @@ def app(content):
             thumb=video_image['src'],
             url=html.select_one('.preview-overlay-container')['data-video-url']
         )
+    version = ""
+    try:
+        version = html.select_one('[itemprop=softwareVersion]').text.strip()
+    except AttributeError:
+        pass
 
     return dict(
         name=html.select_one('.id-app-title').text,
         icon=html.select_one('[itemprop=image]')['src'],
-        price=float(html.select_one('[itemprop=price]')['content'].replace("R$", "").replace("$", "")),
+        price=float(html.select_one('[itemprop=price]')['content'].replace("R$", "").replace("$", "").replace(",", ".")),
         description=html.select_one('[itemprop=description]').text,
         developer=str(html.select_one('[itemprop=author]').string),
         screenshots=[img['src'] for img in html.select('.full-screenshot')],
         review=dict(
             count=int(review_count),
             value=float(rating_value),
-            version=html.select_one('[itemprop=softwareVersion]').text.strip()
+            version=version
         ),
         video=video
     )

@@ -14,6 +14,10 @@ async def apple_categories(loop=None):
     return await fetch(settings.APPLESTORE_CATEGORIES, loop)
 
 
+async def google_categories(loop=None):
+    return await fetch(settings.GOOGLESTORE_CATEGORIES, loop)
+
+
 async def ask_for_urls():
     """
         Calls urldb to get next pool of URLs

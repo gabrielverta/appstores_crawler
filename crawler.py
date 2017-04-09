@@ -4,7 +4,7 @@ import logging
 import os
 import settings
 import time
-from parsers import apple, utils
+from parsers import apple, google, utils
 from random import randint
 from repositories import crawler_repository as repository
 
@@ -21,9 +21,12 @@ async def categories():
     """
         Directory of categories to start 
     """
-    content = await repository.apple_categories()
-    urls = apple.categories(content)
-    await repository.save_category_urls(urls)
+    # content = await repository.apple_categories()
+    # urls = apple.categories(content)
+    # await repository.save_category_urls(urls)
+    google_content = await repository.google_categories()
+    google_urls = google.categories(google_content)
+    await repository.save_category_urls(google_urls)
 
 
 async def crawler():

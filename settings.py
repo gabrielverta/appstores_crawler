@@ -2,12 +2,13 @@ import os
 
 
 APPLESTORE_CATEGORIES = "https://itunes.apple.com/us/genre/ios/id36?mt=8"
+GOOGLESTORE_CATEGORIES = "https://play.google.com/store/apps/top"
 
 APPDB_HOST='127.0.0.1'
 APPDB_PORT=9000
 APPDB_MONGO = {
     'CONNECTION': 'mongodb://127.0.0.1:27017',
-    'DATABASE': 'appstores',
+    'DATABASE': 'googleappstores',
     'COLLECTION': 'apps'
 }
 
@@ -17,7 +18,7 @@ URLDB_HOST='127.0.0.1'
 URLDB_PORT=9001
 URLDB_MONGO = {
     'CONNECTION': 'mongodb://127.0.0.1:27017',
-    'DATABASE': 'appstores',
+    'DATABASE': 'googleappstores',
     'COLLECTION': 'urls'
 }
 

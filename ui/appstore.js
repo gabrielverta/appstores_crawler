@@ -30,7 +30,7 @@
                 var template = _.template($('#result-template').html());
                 for(var i = 0; i < response.apps.length; i++){
                     var app = response.apps[i];
-                    var html = template({'app': app.apple});
+                    var html = template({'app': !!app.apple ? app.apple : app.google});
                     results.append(html);
                 }
             });
