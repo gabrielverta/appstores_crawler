@@ -61,6 +61,13 @@ def top_apps_from_category(content):
 
         counter += 1
 
+    # duplicate results when one of the columns has less than the first one
+    while len(response[0]) > len(response[1]):
+        response[1].append(response[1][-1])
+
+    while len(response[0]) > len(response[2]):
+        response[2].append(response[2][-1])
+
     return list(itertools.chain.from_iterable([
         (response[0][i], response[1][i], response[2][i]) for i in range(len(response[0]))
     ]))
@@ -74,6 +81,13 @@ def app(content):
         :return: dict
     """
     html = BeautifulSoup(content, 'html.parser')
+    review_count = 0
+    rating_value = 0
+    try:
+        review_count = html.select_one('[itemprop=reviewCount]').text.replace(" Ratings", "")
+        rating_value = html.select_one('[itemprop=ratingValue]').text
+    except (AttributeError, ):
+        pass
 
     return dict(
         name=str(html.select_one('[itemprop=name]').string),
@@ -86,8 +100,8 @@ def app(content):
             tablet=[img['src'] for img in html.select('.ipad-screen-shots [itemprop=screenshot]')]
         ),
         review=dict(
-            count=int(html.select_one('[itemprop=reviewCount]').text.replace(" Ratings", "")),
-            value=float(html.select_one('[itemprop=ratingValue]').text),
+            count=int(review_count),
+            value=float(rating_value),
             version=html.select_one('[itemprop=softwareVersion]').text
         )
     )

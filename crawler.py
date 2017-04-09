@@ -32,7 +32,7 @@ async def crawler():
          - ask for urls
          - fetch content
          - in case of directory: save urls from directory (category)
-         - otherwise save app
+         - otherwise it is an app to be saved
     """
     urls = await repository.ask_for_urls()
     logging.debug("{} urls returned".format(len(urls['urls'])))
@@ -41,15 +41,16 @@ async def crawler():
         logging.debug("fetching url {}".format(uri))
         content = await repository.fetch(uri)
         backend = utils.get_backend(uri)
-        logging.debug("{} backend: {}".format(backend, uri))
+        logging.debug("{} backend: {}".format(backend.__name__, uri))
         if backend.is_url_directory(uri):
             apps = backend.top_apps_from_category(content)
             logging.debug("{} apps found".format(len(apps)))
-            await repository.save_directory_urls(apps)
+            await repository.save_directory_urls(apps, url['categories'])
         else:
             app = backend.app(content)
             logging.debug("{} app will be created".format(app['name']))
-            await repository.create_app(url, app)
+            await repository.create_app(backend, url, app)
+
 
 def run():
     """

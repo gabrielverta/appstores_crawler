@@ -1,23 +1,49 @@
 import aiohttp
 import asyncio
 import settings
+from parsers import utils
 
 
 async def apple_categories(loop=None):
     """
+        Fetch URL of the directory of categories
+    
         :param loop: io loop
-        :return: response 
+        :return: html of the page 
     """
     return await fetch(settings.APPLESTORE_CATEGORIES, loop)
 
 
 async def ask_for_urls():
+    """
+        Calls urldb to get next pool of URLs
+    
+        :return: {'urls': []} 
+    """
     urls_api = "http://{}:{}/api/urls".format(settings.URLDB_HOST, settings.URLDB_PORT)
     return await fetch_json(urls_api)
 
 
-async def create_app(app):
-    return None
+async def create_app(backend, url, app):
+    """
+        Creates an app
+        
+        :param backend: 
+        :param url: 
+        :param app: 
+        :return: 
+    """
+    document = {}
+    store = 'apple'
+    if backend == utils.google:
+        store = 'google'
+
+    document[store] = app
+    document[store]['url'] = url['url']
+    document[store]['ranking'] = url['categories']
+
+    apps_api = "http://{}:{}/api/apps".format(settings.APPDB_HOST, settings.APPDB_PORT)
+    return await post(apps_api, None, json=document)
 
 
 async def fetch(url, loop=None):
@@ -64,9 +90,9 @@ async def post(url, loop=None, **kwargs):
 
 async def save_category_urls(urls):
     """
+        Save URLs that came from directory of categories
         
         :param urls: 
-        :return: 
     """
     params = {
         'urls': [],
@@ -87,7 +113,13 @@ async def save_category_urls(urls):
     return await post(urls_api, data=params)
 
 
-async def save_directory_urls(urls):
+async def save_directory_urls(urls, categories):
+    """
+        Save URLs that came from the page of a category
+    
+        :param urls:  
+        :param categories
+    """
     params = {
         'urls': [],
         'order': [],
@@ -98,7 +130,7 @@ async def save_directory_urls(urls):
     for url in urls:
         params['urls'].append(url['url'])
         params['order'].append(order)
-        params['categories'].append(url['name'])
+        params['categories'].append(categories[0]['name'])
         order += 1
 
     urls_api = "http://{}:{}/api/urls".format(settings.URLDB_HOST, settings.URLDB_PORT)

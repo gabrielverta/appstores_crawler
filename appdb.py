@@ -5,12 +5,17 @@ from repositories import app_repository
 
 async def list_apps(request):
     """
-        GET: /api/urls
+        GET: /api/apps
 
         :return application/json
 
             {
-                "urls": ["http://url1.com", "http://url2.com"]
+                "apps": [
+                    {
+                        "apple": {"name": "Kindle – Read eBooks, Magazines & Textbooks", ...},
+                        "google": {"name": "Amazon Kindle", ...}
+                    }
+                ]
             }
     """
     try:
@@ -22,6 +27,11 @@ async def list_apps(request):
 
 
 async def add_app(request):
+    """
+        POST: /api/apps
+         
+        :return: status code 204 
+    """
     data = await request.json()
     try:
         await app_repository.add_app(data)

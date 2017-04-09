@@ -6,6 +6,9 @@ settings.URLDB_MONGO['DATABASE'] = 'test_appstores'
 
 
 def test_urldb():
+    """
+        Tests urldb to verify it is working properly 
+    """
     from aiohttp.test_utils import TestClient, loop_context
     app = urldb.app
     with loop_context() as loop:
