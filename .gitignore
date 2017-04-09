@@ -1,4 +1,6 @@
 .idea/
+logs/
+
 # Created by https://www.gitignore.io/api/python
 
 ### Python ###

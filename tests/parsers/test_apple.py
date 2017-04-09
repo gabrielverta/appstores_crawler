@@ -175,3 +175,13 @@ def test_parse_paid_app_detail():
             assert SPACELESS.sub('', expected[key]) == SPACELESS.sub('', kindle[key])
             continue
         assert expected[key] == kindle[key]
+
+
+def test_is_url_directory():
+    """
+        Test function that verifies if the URL is a directory or an app 
+    """
+    kindle_ios = "https://itunes.apple.com/us/app/kindle-read-ebooks-magazines-textbooks/id302584613?mt=8"
+    ios_books = "https://itunes.apple.com/us/genre/ios-books/id6018?mt=8"
+    assert not apple.is_url_directory(kindle_ios)
+    assert apple.is_url_directory(ios_books)

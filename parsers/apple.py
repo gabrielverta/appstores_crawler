@@ -68,9 +68,10 @@ def top_apps_from_category(content):
 
 def app(content):
     """
+        Map app html page to dict 
     
-        :param content: 
-        :return: 
+        :param content: HTML of the page
+        :return: dict
     """
     html = BeautifulSoup(content, 'html.parser')
 
@@ -90,3 +91,10 @@ def app(content):
             version=html.select_one('[itemprop=softwareVersion]').text
         )
     )
+
+
+def is_url_directory(url):
+    """
+        Returns if an url represents an app or a directory of apps
+    """
+    return 'itunes.apple.com/us/genre' in url
