@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+
 import motor.motor_asyncio
 import settings
 
@@ -15,7 +17,24 @@ async def next_urls(size=10):
     client = motor.motor_asyncio.AsyncIOMotorClient(settings.URLDB_MONGO['CONNECTION'])
     db = client[settings.URLDB_MONGO['DATABASE']]
     collection = db[settings.URLDB_MONGO['COLLECTION']]
-    return await collection.find({}, {'_id': 0}).to_list(length=size)
+    yesterday = datetime.now() - timedelta(days=1)
+    results = await collection.find({'$or': [
+        {'updated_at': None}, {'updated_at': {'$gt': yesterday}}
+    ]}).sort('updated_at').to_list(length=size)
+
+    await collection.update_many({'_id': {'$in': [r['_id'] for r in results]}}, {
+        '$set': {'updated_at': datetime.now()}
+    })
+
+    response = []
+    for result in results:
+        result.pop('_id')
+        try:
+            result.pop('updated_at')
+        except KeyError:
+            pass
+        response.append(result)
+    return response
 
 
 async def add_urls(urls_to_add):
