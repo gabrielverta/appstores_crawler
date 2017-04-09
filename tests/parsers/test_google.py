@@ -112,7 +112,8 @@ def test_parse_app_detail():
             count=681007,
             value=3.6234474182128906,
             version='2.0.1'
-        )
+        ),
+        developer='Nintendo Co., Ltd.'
     )
 
     template = open(os.path.join(TEMPLATES_PATH, "free-app.html")).read()
@@ -166,7 +167,8 @@ Features
             count=6777,
             value=4.676995754241943,
             version='2.0.1'
-        )
+        ),
+        developer='Noodlecake Studios Inc'
     )
 
     template = open(os.path.join(TEMPLATES_PATH, "paid-app.html")).read()

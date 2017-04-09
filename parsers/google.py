@@ -90,7 +90,7 @@ def app(content):
         icon=html.select_one('[itemprop=image]')['src'],
         price=float(html.select_one('[itemprop=price]')['content'].replace("R$", "").replace("$", "").replace(",", ".")),
         description=html.select_one('[itemprop=description]').text,
-        developer=str(html.select_one('[itemprop=author]').string),
+        developer=html.select_one('[itemprop=author] span').text,
         screenshots=[img['src'] for img in html.select('.full-screenshot')],
         review=dict(
             count=int(review_count),

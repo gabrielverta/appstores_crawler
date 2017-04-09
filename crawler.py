@@ -21,11 +21,15 @@ async def categories():
     """
         Directory of categories to start 
     """
-    # content = await repository.apple_categories()
-    # urls = apple.categories(content)
-    # await repository.save_category_urls(urls)
+    logging.debug("Downloading apple categories")
+    content = await repository.apple_categories()
+    urls = apple.categories(content)
+    logging.debug("Saving apple categories")
+    await repository.save_category_urls(urls)
+    logging.debug("Downloading google categories")
     google_content = await repository.google_categories()
     google_urls = google.categories(google_content)
+    logging.debug("Saving google categories")
     await repository.save_category_urls(google_urls)
 
 

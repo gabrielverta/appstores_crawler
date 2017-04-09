@@ -11,3 +11,4 @@
 .mdl-card__title small{position: absolute;left: 20px;color: #efefef;top: 20px;}
 .mdl-cell p{display: block; clear: both; text-align: right; margin: 0; padding: 10px 0; color: #666;}
 #loader{margin: 100px auto;}
+.highlight{width:100%; text-align:center; padding: 100px 0 0px;}
